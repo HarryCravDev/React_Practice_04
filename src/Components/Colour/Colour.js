@@ -1,17 +1,13 @@
 import React from "react";
+import "./Colour.styles.css";
 
-class Colour extends React.Component {
-  state = {};
-
-  render() {
-    const { colour } = this.props;
-    console.log(colour);
-    return (
-      <div>
-        <h1>{this.props.colour.colour}</h1>
-      </div>
-    );
-  }
-}
+const Colour = ({ color, id, clickColor }) => {
+  return (
+    <div
+      className="color"
+      onClick={() => clickColor(id)}
+      style={{ backgroundColor: `${color}` }}></div>
+  );
+};
 
 export default Colour;
