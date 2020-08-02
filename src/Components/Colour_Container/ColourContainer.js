@@ -1,12 +1,17 @@
 import React from "react";
+import "./ColourContainer.styles.css";
 import Colour from "../Colour/Colour";
 
-const ColourContainer = ({ colours }) => {
-  const colourComponents = colours.map(({ colour, id }) => (
-    <Colour key={id} colour={colour} />
+const ColourContainer = ({ colors, clickColor }) => {
+  const colorComponents = colors.map(({ color, id }) => (
+    <Colour key={id} id={id} clickColor={clickColor} color={color} />
   ));
 
-  return <div>{colourComponents}</div>;
+  return (
+    <div className="ui container">
+      <div className="color-container">{colorComponents}</div>
+    </div>
+  );
 };
 
 export default ColourContainer;
