@@ -2,16 +2,18 @@ import React from "react";
 import "./App.css";
 import ColourContainer from "./Components/Colour_Container/ColourContainer";
 import Header from "./Components/Header/Header";
+import ToolBar from "./Components/Tool_Bar/ToolBar";
 
 class App extends React.Component {
   state = {
     colors: [],
-    selectedColor: Math.floor(Math.random() * 6),
+    selectedColor: 0,
     difficulty: {
       easy: 3,
       hard: 6,
     },
-    headerColor: "RGB(0, 0, 0)",
+    headerColor: "rgb(153, 170, 181)",
+    rgbValue: "",
   };
 
   componentDidMount() {
@@ -26,9 +28,19 @@ class App extends React.Component {
         color: `rgb(${r}, ${g}, ${b})`,
       });
     }
-    console.log("Mount");
+
+    // Create winning color by number using index.
+    const number = Math.floor(Math.random() * 6);
+    // Loop array for answer, get value
+    const value = colors.filter((item) => item.id === number);
+    const rgbValue = value[0].color;
+
     // Update state
-    this.setState({ colors: colors });
+    this.setState({
+      colors: colors,
+      selectedColor: number,
+      rgbValue: rgbValue,
+    });
   }
 
   // Update Header with winning color
@@ -38,7 +50,7 @@ class App extends React.Component {
     this.setState({ headerColor: headerColor.color });
   };
 
-  // User Click color
+  // Check if correct answer, remove color if wrong.
   clickColor = (color) => {
     console.log(color);
     // Check if answer is correct
@@ -57,7 +69,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header color={this.state.headerColor} />
+        <Header color={this.state.headerColor} rgbValue={this.state.rgbValue} />
+        <ToolBar />
         <ColourContainer
           clickColor={this.clickColor}
           colors={this.state.colors}
