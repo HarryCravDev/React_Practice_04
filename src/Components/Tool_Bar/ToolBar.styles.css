@@ -1,8 +1,7 @@
 .toolbar-container {
-  height: 5%;
-  background-color: rosybrown;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 5px;
 }
