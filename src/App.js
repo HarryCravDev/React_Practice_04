@@ -74,7 +74,35 @@ class App extends React.Component {
       rgbValue: rgbValue,
       // headerColor: rgbColor,
     });
-    console.log("Hello");
+  };
+
+  setDifficulty = (difficulty) => {
+    // Get Colors
+    let colors = [];
+    for (let i = 0; i < difficulty; i++) {
+      let r = Math.floor(Math.random() * 256);
+      let g = Math.floor(Math.random() * 256);
+      let b = Math.floor(Math.random() * 256);
+      colors.push({
+        id: i,
+        color: `rgb(${r}, ${g}, ${b})`,
+      });
+    }
+
+    // Create winning color by number using index.
+    const number = Math.floor(Math.random() * difficulty);
+    // Loop array for answer, get value
+    const value = colors.filter((item) => item.id === number);
+    const rgbValue = value[0].color;
+    console.log("Value", value);
+    console.log("rgbValue", rgbValue);
+
+    // Update state
+    this.setState({
+      colors: colors,
+      selectedColor: number,
+      rgbValue: rgbValue,
+    });
   };
 
   // Update Header with winning color
@@ -106,7 +134,10 @@ class App extends React.Component {
       <div className="App">
         <Header color={this.state.headerColor} rgbValue={this.state.rgbValue} />
         {/* <button onClick={this.resetGame}>Click</button> */}
-        <ToolBar />
+        <ToolBar
+          resetGame={this.resetGame}
+          setDifficulty={this.setDifficulty}
+        />
         <ColourContainer
           clickColor={this.clickColor}
           colors={this.state.colors}

@@ -5,8 +5,9 @@ class ToolBar extends React.Component {
   render() {
     return (
       <div className="toolbar-container">
-        <button>Play Again?</button>
-        <button>How to play.</button>
+        <button onClick={() => this.props.resetGame()}>Play Again?</button>
+        <button onClick={() => this.props.setDifficulty(3)}>Easy</button>
+        <button onClick={() => this.props.setDifficulty(6)}>Hard</button>
       </div>
     );
   }
